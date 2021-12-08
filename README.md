@@ -8,6 +8,7 @@ using spoonacular API.
 
 # Features
 - retrofit REST
+- Navigation Component
 - Dagger-Hilt - DI
 - DataStore - shared preferences
 - Motion Layout
