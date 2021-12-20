@@ -160,6 +160,9 @@ class MainViewModel @Inject constructor(
             response.code() == 402 -> {
                 return NetworkResult.Error("API key limited")
             }
+            response.code() == 401 -> {
+                return NetworkResult.Error("Specify Api key in Constants")
+            }
             response.body()!!.results.isEmpty() -> {
                 return NetworkResult.Error("Recipes not found.")
             }
@@ -183,6 +186,9 @@ class MainViewModel @Inject constructor(
             }
             response.code() == 402 -> {
                 return NetworkResult.Error("API key limited")
+            }
+            response.code() == 401 -> {
+                return NetworkResult.Error("Specify Api key in Constants")
             }
             response.body()!!.text.isEmpty() -> {
                 return NetworkResult.Error("Food joke not found.")

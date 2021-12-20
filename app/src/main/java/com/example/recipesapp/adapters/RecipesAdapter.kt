@@ -1,5 +1,6 @@
 package com.example.recipesapp.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -41,6 +42,7 @@ class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.RecipesViewHolder>() 
     }
 
     fun setData(newData: FoodRecipe) {
+        Log.i("RecipesAdapter", "setData INFO setting data: $newData")
         val recipesDiffUtil = RecipesDiffUtil(recipeList, newData.results)
         val diffUtilResult = DiffUtil.calculateDiff(recipesDiffUtil)
         recipeList = newData.results

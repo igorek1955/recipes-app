@@ -72,14 +72,21 @@ class RecipesViewModel @Inject constructor(
     }
 
     fun applyQueries(): HashMap<String, String> {
-        return hashMapOf(
-            QUERY_NUMBER to DEFAULT_RECIPES_NUMBER,
-            QUERY_API_KEY to API_KEY,
-            QUERY_TYPE to mealAndDiet.selectedMealType,
-            QUERY_DIET to mealAndDiet.selectedDietType,
-            QUERY_ADD_RECIPE_INFORMATION to "true",
-            QUERY_FILL_INGREDIENTS to "true"
-        )
+        val queries: HashMap<String, String> = HashMap()
+
+        queries[QUERY_NUMBER] = DEFAULT_RECIPES_NUMBER
+        queries[QUERY_API_KEY] = API_KEY
+        queries[QUERY_ADD_RECIPE_INFORMATION] = "true"
+        queries[QUERY_FILL_INGREDIENTS] = "true"
+
+        if (this@RecipesViewModel::mealAndDiet.isInitialized) {
+            queries[QUERY_TYPE] = mealAndDiet.selectedMealType
+            queries[QUERY_DIET] = mealAndDiet.selectedDietType
+        } else {
+            queries[QUERY_TYPE] = DEFAULT_MEAL_TYPE
+            queries[QUERY_DIET] = DEFAULT_DIET_TYPE
+        }
+        return queries
     }
 
     fun prepareRecipeSearchQuery(query: String): Map<String, String> {

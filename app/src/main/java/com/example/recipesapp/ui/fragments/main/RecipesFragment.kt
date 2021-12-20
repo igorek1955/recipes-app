@@ -49,8 +49,8 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         binding!!.mainViewModel = mainViewModel
 
         setupMenu()
-        setupNetworkListener()
         setupRecyclerView()
+        setupNetworkListener()
         setupFab()
         return binding!!.root
     }
@@ -84,6 +84,11 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
 
 
     private fun setupNetworkListener() {
+
+        recipesViewModel.readBackOnline.asLiveData().observe(viewLifecycleOwner, {
+            recipesViewModel.backOnline = it
+        })
+
         lifecycleScope.launchWhenStarted {
             networkListener = NetworkListener()
             networkListener.checkNetworkAvailability(requireContext())
@@ -94,10 +99,6 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
                     readDatabase()
                 }
         }
-
-        recipesViewModel.readBackOnline.asLiveData().observe(viewLifecycleOwner, {
-            recipesViewModel.backOnline = it
-        })
     }
 
     private fun setupFab() {
