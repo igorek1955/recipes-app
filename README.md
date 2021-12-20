@@ -13,7 +13,7 @@ using spoonacular API.
 - Dagger-Hilt - DI
 - DataStore - shared preferences
 - Motion Layout
-- Room DB for persistance
+- Room DB for persistence
 - Lazy load with shimmer effect
 - Night Mode support
 - LiveData 
