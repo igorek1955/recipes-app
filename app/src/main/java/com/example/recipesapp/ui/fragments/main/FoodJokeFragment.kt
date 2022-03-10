@@ -18,7 +18,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FoodJokeFragment : Fragment() {
 
-    //using delegate to get main view model
     private val mainViewModel: MainViewModel by viewModels()
     private var binding: FragmentFoodJokeBinding? = null
     private var foodJoke = "no joke yet"
@@ -27,7 +26,6 @@ class FoodJokeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentFoodJokeBinding.inflate(layoutInflater, container, false)
         binding?.lifecycleOwner = viewLifecycleOwner
         binding?.mainViewModel = mainViewModel

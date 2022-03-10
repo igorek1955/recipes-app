@@ -122,17 +122,17 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
      */
     private fun loadDataFromCache() {
         lifecycleScope.launch {
-            mainViewModel.localRecipes.observe(viewLifecycleOwner, { database ->
+            mainViewModel.localRecipes.observe(viewLifecycleOwner) { database ->
                 if (database.isNotEmpty()) {
                     mAdapter.setData(database[0].foodRecipe)
                 }
-            })
+            }
         }
     }
 
     private fun readDatabase() {
         lifecycleScope.launch {
-            mainViewModel.localRecipes.observeOnce(viewLifecycleOwner, { database ->
+            mainViewModel.localRecipes.observeOnce(viewLifecycleOwner) { database ->
                 /**
                  * read database ONLY if db is not empty AND we
                  * have not pressed apply new search params in RecipesBottomSheet
@@ -145,7 +145,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
                 } else {
                     requestApiData()
                 }
-            })
+            }
         }
     }
 
@@ -155,7 +155,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun requestApiData() {
         Log.i("RecipesFragment", "requestApiData called")
         mainViewModel.getRecipes(recipesViewModel.applyQueries())
-        mainViewModel.recipesResponse.observe(viewLifecycleOwner, { response ->
+        mainViewModel.recipesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
@@ -175,7 +175,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
                     showShimmerEffect()
                 }
             }
-        })
+        }
     }
 
     /**
@@ -185,7 +185,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         showShimmerEffect()
         Log.d("RecipesFragment", "onQueryTextSubmit called for query: $query")
         mainViewModel.searchRecipes(recipesViewModel.prepareRecipeSearchQuery(query))
-        mainViewModel.searchedRecipesResponse.observe(viewLifecycleOwner, { response ->
+        mainViewModel.searchedRecipesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
@@ -204,7 +204,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
                     showShimmerEffect()
                 }
             }
-        })
+        }
     }
 
 
